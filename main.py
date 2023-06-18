@@ -1,6 +1,6 @@
 weight_count = 0
 package_weight = 20
-packages_count = 0
+packages_count = 1
 empty_kilograms = [[]]
 
 print("Ile elementów chcesz wysłać?: ")
@@ -13,21 +13,24 @@ for element in range(1, parcel_count + 1):
         weight_count += element_weight
         packages_count += 1
         empty_kilograms.append([])
-        empty_kilograms[packages_count].append(package_weight - weight_count)
+        empty_kilograms[packages_count - 1].append(package_weight -
+                                                   weight_count)
         break
     while weight_count + element_weight > package_weight:
         packages_count += 1
         empty_kilograms.append([])
-        empty_kilograms[packages_count].append(
+        empty_kilograms[packages_count - 1].append(
             package_weight - weight_count)
         break
     if weight_count + element_weight <= package_weight:
         weight_count += element_weight
-        empty_kilograms[packages_count].append(package_weight - weight_count)
+        empty_kilograms[packages_count - 1].append(package_weight -
+                                                   weight_count)
     else:
         weight_count += element_weight
     if element_weight == parcel_count:
-        empty_kilograms[packages_count].append(package_weight - weight_count)
+        empty_kilograms[packages_count - 1].append(package_weight -
+                                                   weight_count)
 
 max_empty_kilograms = max([max(empty_kgs) for empty_kgs in empty_kilograms])
 max_empty_package = [i+1 for i, empty_kgs in enumerate(empty_kilograms) if
